@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class EventSeatService {
 
     @Transactional
     public void reserveSeat(Long eventId, Long eventSeatId) {
-        int updated = eventSeatRepository.reserve(eventId, eventSeatId);
+        int updated = eventSeatRepository.reserve(eventId, eventSeatId, OffsetDateTime.now().plusMinutes(10));
         if (updated == 0) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Seat is not available");
         }

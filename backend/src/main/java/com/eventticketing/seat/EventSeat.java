@@ -1,5 +1,7 @@
 package com.eventticketing.seat;
 
+import java.time.OffsetDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,6 +29,9 @@ public class EventSeat {
     @Column(name = "status", nullable = false)
     private String status;
 
+    @Column(name = "hold_expires_at")
+    private OffsetDateTime holdExpiresAt;
+
     protected EventSeat() {
         // required by JPA
     }
@@ -51,5 +56,9 @@ public class EventSeat {
 
     public String getStatus() {
         return status;
+    }
+
+    public OffsetDateTime getHoldExpiresAt() {
+        return holdExpiresAt;
     }
 }
