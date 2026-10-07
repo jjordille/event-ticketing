@@ -120,14 +120,10 @@ Code is organized **by feature** (`event/`, later `booking/`, `seat/`, `user/`) 
 Install [Homebrew](https://brew.sh) if you don't have it, then:
 
 ```bash
-brew install openjdk@21 node@22 git
-brew install --cask docker            # Docker Desktop. Open it once after installing.
-```
-
-Make Java 21 the default (Homebrew prints this command after install):
-
-```bash
-sudo ln -sfn $(brew --prefix)/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
+brew install --cask temurin@21        # Java 21 (Eclipse Temurin JDK)
+brew install node@22 git gh
+brew link --overwrite node@22         # put node/npm on your PATH
+brew install --cask docker-desktop    # Docker Desktop. Open it once after installing.
 ```
 
 Check everything:
