@@ -80,3 +80,18 @@ h1 {
   color: var(--muted);
   font-size: 14px;
 }
+
+.seat-map {
+  list-style: none;
+  padding: 0;
+}
+
+.seat-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.seat-row-label {
+  width: 1.5rem;
+}

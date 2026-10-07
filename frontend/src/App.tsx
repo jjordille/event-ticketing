@@ -1,5 +1,6 @@
 import { BackendStatus } from './components/BackendStatus'
 import { EventList } from './components/EventList'
+import { SeatMap } from './components/SeatMap'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <BackendStatus />
       </header>
       <EventList />
+      <SeatMap venueId={1} />
     </main>
   )
 }
