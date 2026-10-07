@@ -15,13 +15,30 @@ export function SeatMap({ eventId }: { eventId: number }) {
     (rows[seat.rowLabel] ??= []).push(seat);
   }
 
+  function reserveSeat(seatId: number) {
+    fetch(`/api/events/${eventId}/seats/${seatId}/reserve`, {
+      method: "POST",
+    }).then((response) => {
+      if (!response.ok) {
+        alert("Sorry, that seat was just taken.");
+      }
+      window.location.reload();
+    });
+  }
+
   return (
     <ul className="seat-map">
       {Object.entries(rows).map(([rowLabel, rowSeats]) => (
         <li key={rowLabel} className="seat-row">
           <span className="seat-row-label">{rowLabel}</span>
           {rowSeats.map((seat) => (
-            <button key={seat.id} disabled={seat.status !== 'AVAILABLE'}>{seat.seatNumber}</button>
+            <button
+              onClick={() => reserveSeat(seat.id)}
+              key={seat.id}
+              disabled={seat.status !== "AVAILABLE"}
+            >
+              {seat.seatNumber}
+            </button>
           ))}
         </li>
       ))}

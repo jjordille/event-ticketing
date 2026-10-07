@@ -1,7 +1,9 @@
 package com.eventticketing.seat;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,4 +26,11 @@ public class EventSeatService {
                 .toList();
     }
 
+    @Transactional
+    public void reserveSeat(Long eventId, Long eventSeatId) {
+        int updated = eventSeatRepository.reserve(eventId, eventSeatId);
+        if (updated == 0) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Seat is not available");
+        }
+    }
 }
