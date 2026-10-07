@@ -1,7 +1,7 @@
-import { useSeats, type Seat } from "../api/seats";
+import { useEventSeats, type EventSeat } from "../api/seats";
 
-export function SeatMap({ venueId }: { venueId: number }) {
-  const { data: seats, isPending, isError, error } = useSeats(venueId);
+export function SeatMap({ eventId }: { eventId: number }) {
+  const { data: seats, isPending, isError, error } = useEventSeats(eventId);
 
   if (isPending) return <p>Loading seat map…</p>;
   if (isError)
@@ -10,7 +10,7 @@ export function SeatMap({ venueId }: { venueId: number }) {
     );
   if (!seats || seats.length === 0) return <p>No seats available.</p>;
 
-  const rows: Record<string, Seat[]> = {};
+  const rows: Record<string, EventSeat[]> = {};
   for (const seat of seats) {
     (rows[seat.rowLabel] ??= []).push(seat);
   }
@@ -21,7 +21,7 @@ export function SeatMap({ venueId }: { venueId: number }) {
         <li key={rowLabel} className="seat-row">
           <span className="seat-row-label">{rowLabel}</span>
           {rowSeats.map((seat) => (
-            <button key={seat.id}>{seat.seatNumber}</button>
+            <button key={seat.id} disabled={seat.status !== 'AVAILABLE'}>{seat.seatNumber}</button>
           ))}
         </li>
       ))}

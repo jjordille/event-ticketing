@@ -10,7 +10,7 @@ function App() {
         <BackendStatus />
       </header>
       <EventList />
-      <SeatMap venueId={1} />
+      <SeatMap eventId={1} />
     </main>
   )
 }
